@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Artisan Roast | Premium Coffee & Community</title>
+    <!-- FAVICON (page icon) -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%234A2C0B'/%3E%3Cpath d='M30 40 L70 40 L65 70 L35 70 Z' fill='%23C9A66B'/%3E%3Ccircle cx='40' cy='30' r='6' fill='%23F5F0E8'/%3E%3Ccircle cx='60' cy='30' r='6' fill='%23F5F0E8'/%3E%3C/svg%3E">
+    
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --coffee-brown: #4A2C0B;
+            --cream: #F5F0E8;
+            --gold: #C9A66B;
+            --dark-text: #2C1E12;
+        }
+        
+        * {
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .navbar {
+            background-color: var(--coffee-brown) !important;
+            box-shadow: 0 4px 15px rgba(74, 44, 11, 0.15);
+        }
+        
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero with background image (now explicit) */
+        .hero {
+            height: 100vh;
+            min-height: 650px;
+            background-image: linear-gradient(rgba(42, 25, 10, 0.45), rgba(42, 25, 10, 0.55)), 
+                              url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            animation: fadeInUp 1.2s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn-artisan {
+            background-color: var(--gold);
+            color: var(--coffee-brown);
+            font-weight: 600;
+            padding: 14px 36px;
+            border-radius: 50px;
+            border: none;
+        }
+        
+        .btn-artisan:hover {
+            background-color: #e0c080;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(201, 166, 107, 0.3);
+        }
+        
+        /* WhatsApp icon button (replaces old Order Now) */
+        .btn-whatsapp-icon {
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-whatsapp-icon:hover {
+            background-color: #20b859;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            color: white;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            color: var(--coffee-brown);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Uniform card sizing */
+        .menu-card {
+            overflow: hidden;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(74, 44, 11, 0.15);
+        }
+        
+        .menu-card img {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .menu-card .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .coffee-bg {
+            background-color: var(--cream);
+        }
+        
+        .footer {
+            background-color: var(--coffee-brown);
+            color: white;
+        }
+        
+        .nav-link.active {
+            color: var(--gold) !important;
+        }
+        
+        /* Social icons row for contact section */
+        .social-icons a {
+            background: rgba(255,255,255,0.15);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            color: white;
+            font-size: 1.5rem;
+        }
+        .social-icons a:hover {
+            background: var(--gold);
+            color: var(--coffee-brown);
+            transform: scale(1.1);
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top py-3" id="navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white d-flex align-items-center" href="#">
+                <i class="fas fa-mug-hot me-2 fs-3"></i>
+                <span style="font-family: 'Playfair Display', serif; font-size: 1.8rem;">The Artisan Roast</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link px-3" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#story">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#sustainability">Sustainability</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-3">
+                        <!-- REPLACED: Order Now button with WhatsApp icon button linking to +256764622931 -->
+                        <a href="https://wa.me/256764622931" target="_blank" class="btn-whatsapp-icon">
+                            <i class="fab fa-whatsapp fs-5"></i> <span>Order</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (now with explicit photo of coffee/barista) -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row justify-content-center text-center text-white">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="display-3 fw-bold mb-3" style="letter-spacing: -2px;">The Artisan Roast</h1>
+                    <p class="lead fs-4 mb-4" style="max-width: 620px; margin: 0 auto;">
+                        Where every cup tells a story. Premium specialty coffee • Warm community • Perfect moments.
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="#menu" class="btn btn-artisan btn-lg px-5">Explore Our Menu</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg px-5">Find Us</a>
+                    </div>
+                    <div class="mt-5">
+                        <i class="fas fa-arrow-down fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5 text-white text-center">
+            <small class="d-block mb-1 opacity-75">SCROLL TO DISCOVER</small>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 coffee-bg">
+        <div class="container py-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Artisan Roast Interior" class="img-fluid rounded-4 shadow" style="border-radius: 24px;">
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <span class="badge bg-warning text-dark mb-3 px-3 py-2">EST. 2026 • KAMPALA</span>
+                    <h2 class="section-title display-5 mb-4">Crafted with Passion,<br>Served with Heart</h2>
+                    <p class="lead text-muted">
+                        In the heart of Kampala, The Artisan Roast was born from a simple belief: great coffee brings people together.
+                    </p>
+                    <p>
+                        We source the finest organic beans from ethical farmers across East Africa and beyond. 
+                        Our cozy, modern space is designed for remote work, meaningful conversations, or simply enjoying a perfect cup.
+                    </p>
+                    <div class="row mt-5 g-4">
+                        <div class="col-6">
+                            <h5 class="fw-semibold"><i class="fas fa-check text-success me-2"></i> Specialty Coffee</h5>
+                            <h5 class="fw-semibold"><i class="fas fa-check text-success me-2"></i> Fresh Pastries Daily</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="fw-semibold"><i class="fas fa-check text-success me-2"></i> Free High-Speed WiFi</h5>
+                            <h5 class="fw-semibold"><i class="fas fa-check text-success me-2"></i> Community Events</h5>
+                        </div>
+                    </div>
+                    <a href="#menu" class="btn btn-artisan mt-4">See What's Brewing →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section (cards now same height due to h-100 and flex column) -->
+    <section id="menu" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-dark text-white px-4 py-2 mb-3">MENU</span>
+                <h2 class="section-title display-5">Signature Offerings</h2>
+                <p class="lead col-lg-6 mx-auto">Handcrafted with love using only the finest ingredients</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Beverages - all cards identical height now -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-card h-100">
+                        <img src="https://images.unsplash.com/photo-1572449043416-55f4685c9a4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             class="card-img-top" alt="Latte Art">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title">Classic Latte</h5>
+                                <span class="badge bg-success">UGX 8,500</span>
+                            </div>
+                            <p class="card-text text-muted small">Smooth espresso with steamed milk and delicate latte art</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-card h-100">
+                        <img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             class="card-img-top" alt="Espresso">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title">Single Origin Espresso</h5>
+                                <span class="badge bg-success">UGX 6,000</span>
+                            </div>
+                            <p class="card-text text-muted small">Bold and complex notes from our monthly rotating Ethiopian or Ugandan beans</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="menu-card h-100">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             class="card-img-top" alt="Cappuccino">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title">Cappuccino</h5>
+                                <span class="badge bg-success">UGX 8,000</span>
+                            </div>
+                            <p class="card-text text-muted small">Rich espresso topped with equal parts steamed milk and silky foam</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Food -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="menu-card h-100">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             class="card-img-top" alt="Croissant">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title">Butter Croissant</h5>
+                                <span class="badge bg-success">UGX 7,500</span>
+                            </div>
+                            <p class="card-text text-muted small">Freshly baked daily, flaky and golden</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="menu-card h-100">
+                        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             class="card-img-top" alt="Avocado Toast">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title">Avocado &amp; Egg Toast</h5>
+                                <span class="badge bg-success">UGX 12,000</span>
+                            </div>
+                            <p class="card-text text-muted small">Smashed avocado on sourdough with poached egg &amp; chili flakes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="menu-card h-100">
+                        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             class="card-img-top" alt="Signature Mocha">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title">House Mocha</h5>
+                                <span class="badge bg-success">UGX 9,500</span>
+                            </div>
+                            <p class="card-text text-muted small">Espresso, house-made chocolate, steamed milk &amp; whipped cream</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-outline-dark btn-lg px-5" onclick="alert('Full menu coming soon! Download our app for takeaway orders.')">
+                    View Full Menu &amp; Prices
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section id="story" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="p-5 rounded-4" style="background: linear-gradient(135deg, #4A2C0B, #6F4E37); color: white;">
+                        <h2 class="display-6 mb-4">Our Vision</h2>
+                        <p class="lead">To become Kampala’s most loved coffee destination — where quality beverages, excellent service, and a warm community atmosphere come together every single day.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="p-5 border border-2 rounded-4 h-100">
+                        <h2 class="display-6 mb-4 text-coffee">Our Mission</h2>
+                        <ul class="list-unstyled fs-5">
+                            <li class="mb-3"><i class="fas fa-seedling text-success me-3"></i> Serve ethically sourced, high-quality coffee</li>
+                            <li class="mb-3"><i class="fas fa-users text-success me-3"></i> Create a welcoming space for connection and productivity</li>
+                            <li class="mb-3"><i class="fas fa-heart text-success me-3"></i> Deliver consistent, memorable experiences</li>
+                            <li class="mb-3"><i class="fas fa-leaf text-success me-3"></i> Operate sustainably and profitably</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Objectives -->
+            <div class="row mt-5">
+                <div class="col-12 text-center mb-5" data-aos="fade-up">
+                    <h3 class="section-title">Our Goals for 2026</h3>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="text-center">
+                        <div class="mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px; background: var(--gold); color: var(--coffee-brown); border-radius: 50%;">
+                            <i class="fas fa-store fs-3"></i>
+                        </div>
+                        <h5>Fully Operational Shop</h5>
+                        <p class="text-muted">Opening doors in the first quarter of 2026</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="text-center">
+                        <div class="mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px; background: var(--gold); color: var(--coffee-brown); border-radius: 50%;">
+                            <i class="fas fa-users fs-3"></i>
+                        </div>
+                        <h5>Loyal Community</h5>
+                        <p class="text-muted">Build lasting relationships with every guest</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="text-center">
+                        <div class="mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px; background: var(--gold); color: var(--coffee-brown); border-radius: 50%;">
+                            <i class="fas fa-chart-line fs-3"></i>
+                        </div>
+                        <h5>Steady Growth</h5>
+                        <p class="text-muted">Sustainable monthly revenue increase</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability -->
+    <section id="sustainability" class="py-5 coffee-bg">
+        <div class="container py-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Sustainability" class="img-fluid rounded-4 shadow">
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <span class="badge bg-success mb-3">PLANET FIRST</span>
+                    <h2 class="section-title display-5 mb-4">Sustainability is in our DNA</h2>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-recycle fa-2x text-success me-4"></i>
+                                <div>
+                                    <h5>Zero-Waste Goal</h5>
+                                    <p class="text-muted">Compostable cups, recycling stations, and daily waste audits</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-seedling fa-2x text-success me-4"></i>
+                                <div>
+                                    <h5>Ethical Beans</h5>
+                                    <p class="text-muted">Direct trade with smallholder farmers in Uganda, Ethiopia &amp; Kenya</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-leaf fa-2x text-success me-4"></i>
+                                <div>
+                                    <h5>Local Suppliers</h5>
+                                    <p class="text-muted">Milk, pastries, and produce sourced within 50km</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-solar-panel fa-2x text-success me-4"></i>
+                                <div>
+                                    <h5>Solar Powered</h5>
+                                    <p class="text-muted">100% renewable energy for our roastery &amp; café</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location / Visit Us (Order WhatsApp button replaced with social icons row) -->
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="display-5 mb-4">Visit Us in Kampala</h2>
+                    <p class="lead">Plot 45, Acacia Avenue, Kololo • Kampala, Uganda</p>
+                    <div class="mt-4">
+                        <p><strong>Opening Hours</strong><br>
+                        Monday – Friday: 7:00 AM – 8:00 PM<br>
+                        Saturday – Sunday: 8:00 AM – 9:00 PM</p>
+                    </div>
+                    <!-- REPLACED: Order via WhatsApp button with social media icons -->
+                    <div class="mt-4 d-flex gap-3 social-icons">
+                        <a href="https://wa.me/256764622931" target="_blank" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/artisanroast" target="_blank" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/artisanroast" target="_blank" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://tiktok.com/@artisanroast" target="_blank" class="text-white"><i class="fab fa-tiktok"></i></a>
+                        <a href="mailto:hello@artisanroast.ug" class="text-white"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left">
+                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.757!2d32.582!3d0.313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177ddc4b0b0b0b0b%3A0x0!2sKololo%2C%20Kampala!5e0!3m2!1sen!2sug!4v1700000000000" 
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title display-5">Let's Stay Connected</h2>
+                        <p class="lead">Have questions? Want to host an event? Drop us a line.</p>
+                    </div>
+                    
+                    <form id="contactForm" class="row g-4" onsubmit="handleSubmit(event)">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-lg" placeholder="Your Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control form-control-lg" placeholder="Email Address" required>
+                        </div>
+                        <div class="col-12">
+                            <textarea class="form-control form-control-lg" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-artisan btn-lg px-5">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="fw-bold text-white"><i class="fas fa-mug-hot me-2"></i>The Artisan Roast</h4>
+                    <p class="opacity-75">Crafting community, one cup at a time.</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="https://instagram.com/artisanroast" target="_blank" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/artisanroast" target="_blank" class="text-white fs-4"><i class="fab fa-facebook"></i></a>
+                        <a href="https://tiktok.com/@artisanroast" target="_blank" class="text-white fs-4"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/256764622931" target="_blank" class="text-white fs-4"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h6 class="fw-bold mb-3" style="color: var(--gold);">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="#menu" class="text-white text-decoration-none">Menu</a></li>
+                        <li><a href="#story" class="text-white text-decoration-none">Our Story</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <h6 class="fw-bold mb-3" style="color: var(--gold);">Contact</h6>
+                    <p class="opacity-75 small">
+                        Plot 45, Acacia Avenue<br>
+                        Kololo, Kampala<br><br>
+                        +256 700 123 456<br>
+                        hello@artisanroast.ug
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <h6 class="fw-bold mb-3" style="color: var(--gold);">Stay Updated</h6>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn" style="background: var(--gold); color: var(--coffee-brown);">Join</button>
+                    </div>
+                    <small class="opacity-50 mt-2 d-block">Monthly brew news &amp; special offers</small>
+                </div>
+            </div>
+            <hr class="my-4 opacity-25">
+            <div class="text-center opacity-75 small">
+                © 2026 The Artisan Roast • Prepared with ❤️ by Ashanty Acidria • All rights reserved
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 900,
+            once: true,
+            offset: 100
+        });
+        
+        // Navbar active link
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Contact form handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert("✅ Thank you! Your message has been received. We'll reply within 24 hours.");
+                e.target.reset();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1200);
+        }
+        
+        // Easter egg: Press "R" for random coffee fact
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'r') {
+                const facts = [
+                    "Uganda is the 2nd largest coffee producer in Africa!",
+                    "A single coffee tree produces enough beans for about 1kg of roasted coffee per year.",
+                    "The word 'coffee' comes from the Arabic 'qahwah'.",
+                    "We roast our beans fresh every single morning."
+                ];
+                alert("☕ Coffee Fact: " + facts[Math.floor(Math.random() * facts.length)]);
+            }
+        });
+        
+        // Make hero text appear after load
+        window.onload = () => {
+            console.log('%cThe Artisan Roast website loaded successfully ☕', 'color: #C9A66B; font-size: 14px;');
+        };
+    </script>
+</body>
+</html>
